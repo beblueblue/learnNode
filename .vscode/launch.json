@@ -2,10 +2,10 @@
 				"version": "0.2.0",
 				"configurations": [
 					{
-						"name": "Run hello.js",
+						"name": "Run streamDemo.js",
 						"type": "node",
 						"request": "launch",
-						"program": "${workspaceRoot}/hello.js",
+						"program": "${workspaceRoot}/streamDemo.js",
 						"stopOnEntry": false,
 						"args": [],
 						"cwd": "${workspaceRoot}",

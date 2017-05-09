@@ -1,7 +1,9 @@
 'use strict'
 
-var name = 'world';
+var s = 'Hello';
 
-var s = `Hello, ${name}!`
+function greet(name){
+    console.log(s+', '+name+'!');
+}
 
-console.log(s);
+module.exports = greet;
