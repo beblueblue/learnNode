@@ -5,7 +5,7 @@
 						"name": "Run streamDemo.js",
 						"type": "node",
 						"request": "launch",
-						"program": "${workspaceRoot}/streamDemo.js",
+						"program": "${workspaceRoot}/DHofNode.js",
 						"stopOnEntry": false,
 						"args": [],
 						"cwd": "${workspaceRoot}",
