@@ -1,0 +1,28 @@
+{
+    // 使用 IntelliSense 以学习相关的 Node.js 调试属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+					{
+						"name": "Run app.js in hello-koa",
+						"type": "node",
+						"request": "launch",
+						"program": "${workspaceRoot}/app.js",
+						"stopOnEntry": false,
+						"args": [],
+						"cwd": "${workspaceRoot}",
+						"preLaunchTask": null,
+						"runtimeExecutable": null,
+						"runtimeArgs": [
+							"--nolazy"
+						],
+						"env": {
+							"NODE_ENV": "development"
+						},
+						"console": "internalConsole",
+						"sourceMaps": false,
+						"outFiles": []
+					}
+				]
+}
