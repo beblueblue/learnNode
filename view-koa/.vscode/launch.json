@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
 					{
-						"name": "Run app.js in hello-koa",
+						"name": "Run app.js in view-koa",
 						"type": "node",
 						"request": "launch",
 						"program": "${workspaceRoot}/app.js",
@@ -15,7 +15,7 @@
 						"preLaunchTask": null,
 						"runtimeExecutable": null,
 						"runtimeArgs": [
-							"--nolazy"
+							"--nolazy", "--use_strict"
 						],
 						"env": {
 							"NODE_ENV": "development"
