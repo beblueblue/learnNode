@@ -6,8 +6,9 @@ const Koa = require('koa');
 //引入"koa-bodyparser":
 const bodyParser = require('koa-bodyparser');
 
-//导入controllers middleware:
+//导入controller middleware:
 const controller = require('./controller');
+
 
 //导入templating middleware;
 const templating = require('./templating');
@@ -32,11 +33,16 @@ app.use(async(ctx,next)=>{
 //增加环境变量，提高生产效率：static file support
 if(! isProduction) {
     let staticFiles = require('./static-files');
-    app.use(staticFiles('/static/', __dirname + '/statcic'));
+    app.use(staticFiles('/static/', __dirname + '/static'));
 }
 
 //增加koa-bodyparser中间件: parse request body
 app.use(bodyParser());
+
+/*
+//增加static-files中间件：
+app.use(staticFiles());
+*/
 
 //add nunjucks as view:
 app.use(templating('views', {
@@ -44,7 +50,7 @@ app.use(templating('views', {
     watch: !isProduction
 }));
 
-//使用controllers middleware: add controller
+//使用controller middleware: add controller
 app.use(controller());
 
 //在端口3000监听：
