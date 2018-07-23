@@ -786,3 +786,14 @@ text-decoration: underline;
 .main-box {
   padding: 0 20px;
 }
+/* 公共容器 */
+.com-button {
+  border-radius: 4px;
+  background-color: #428bca;
+  color: #FFF;
+  display: inline-block;
+  padding: 4px 16px;
+  border: 1px solid #428bca;
+  line-height: 1.5;
+  cursor: pointer;
+}
