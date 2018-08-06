@@ -11,6 +11,17 @@ canvas { width: 100%; height: 100% }
   renderer.setSize( window.innerWidth, window.innerHeight );
   camera.position.z = 300;
   document.body.appendChild( renderer.domElement );
+
+  //给场景添加天空盒子纹理
+  var cubeTextureLoader = new THREE.CubeTextureLoader();
+      cubeTextureLoader.setPath( '/static/images/textures/' );
+      //六张图片分别是朝前的（posz）、朝后的（negz）、朝上的（posy）、朝下的（negy）、朝右的（posx）和朝左的（negx）。
+  var cubeTexture = cubeTextureLoader.load( [
+      'right.jpg', 'left.jpg',
+      'top.jpg', 'bottom.jpg',
+      'front.jpg', 'back.jpg'
+  ] );
+  scene.background = cubeTexture;
   
   var vShader = $('vertexshader');
   var fShader = $('fragmentshader');

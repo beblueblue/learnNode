@@ -15,7 +15,10 @@
 
 <body>
     <header class="navbar navbar-static-top">
-        <div class="container tc blue mt20 mb20 f16">探索THREE.js</div>
+        <a href="/" class="ml100 f16 fl blue {% if hideClass %}none{% endif %}">返回首页</a>
+        <div class="container tc blue mt20 mb20 f16">
+            探索THREE.js
+        </div>
     </header>
     {% block main %} {% endblock %}
     <footer style="padding: 20px 0;">
