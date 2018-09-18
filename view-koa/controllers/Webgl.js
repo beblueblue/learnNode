@@ -8,5 +8,10 @@ module.exports = {
         ctx.render('webgl-02.html',{
             title: 'WebGL原理-工作原理'
         });
+    },
+    'GET /webgl-03': async (ctx,next) => {
+        ctx.render('webgl-03.html',{
+            title: 'WebGL原理-图像处理'
+        });
     }
 };
