@@ -1,0 +1,127 @@
+{% extends "base.html" %} {% block main %}
+<link rel="stylesheet" type="text/css" href="/static/css/webgl-tutorials.css">
+<style>
+  .main-box {
+    background: #e8e8e8;
+    padding: 20px 30px;
+  }
+  canvas {
+    width: 90vw;
+    height: 50vh;
+    display: block;
+    background: #fff;
+  }
+</style>
+<div class="main-box demo">
+  <canvas id="draw"></canvas>
+</div>
+<script src="/static/js/webgl-utils.js"></script>
+<script id="2d-vertex-shader" type="x-shader/x-vertex">
+    attribute vec2 a_positon;
+    attribute vec2 a_texCoord;
+
+    uniform vec2 u_resolution;
+    uniform float u_flipy;
+
+    varying vec2 v_texCoord;
+
+    void main(){
+        // convert the rectangle from pixels to 0.0 to 1.0
+        
+    }
+</script>
+<script>
+    "use strict";
+
+    function main(){
+        var image = new Image();
+        image.src = 'http://localhost:3000/static/images/webgl/leaves.jpg';
+        image.onload = function() {
+            render(image, 'demo');
+        }
+    }
+
+    function render(image, demo_type){
+        var canvas = {}, gl = {};
+        demo_type = demo_type || 'demo';
+        canvas = $('.'+demo_type+' .draw').get(0);
+        gl = canvas.getContext("webgl");
+        if (!gl) {
+            // 你不能使用WebGL！
+            console.log('浏览器需要升级');
+            return false;
+        }
+
+        //创建一个纹理并写入图像
+        var originalImageTexture = createAndSetupTexture(gl);
+        gl.textImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+
+        //创建两个纹理绑定到缓存中
+        var textrues = [];
+        var framebuffers = [];
+        for(let ii = 0; ii < 2; ++ii){
+            let texture = createAndSetupTexture(gl);
+            textures.push(texture);
+            
+            //设置纹理大小和图像大小一致
+            gl.textImage2D(
+                gl.TEXTURE_2D, 0, gl.RGBA, image.width, image.height, 0,
+                gl.RGBA, gl.UNSIGNED_BYTE, null);
+            
+            //创建一个帧缓存
+            let fbo = gl.createFramebuffer();
+            framebuffers.push(fbo);
+            gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+
+            //绑定纹理到帧缓存
+            gl.framebufferTexture2D(
+                gl.FRAMEBUFFER, gl.COLOR_ATTACHMENTO, gl.TEXTURE_2D, texture, 0);
+        }
+
+        // 定义一些卷积核
+        var kernels = {
+            normal: [
+            0, 0, 0,
+            0, 1, 0,
+            0, 0, 0
+            ],
+            gaussianBlur: [
+            0.045, 0.122, 0.045,
+            0.122, 0.332, 0.122,
+            0.045, 0.122, 0.045
+            ],
+            unsharpen: [
+            -1, -1, -1,
+            -1,  9, -1,
+            -1, -1, -1
+            ],
+            emboss: [
+            -2, -1,  0,
+            -1,  1,  1,
+                0,  1,  2
+            ]
+        };
+            
+        // 将要使用的效果列表
+        var effectsToApply = [
+            "gaussianBlur",
+            "emboss",
+            "gaussianBlur",
+            "unsharpen"
+        ];
+
+    }
+
+    function createAndSetupTexture(gl){
+        var texture = gl.createTexture();
+
+        // 设置材质，这样我们可以对任意大小的图像进行像素操作
+        gl.textParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.textParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.textParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.textParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+
+        return texture;
+    }
+</script>
+{% endblock %}
