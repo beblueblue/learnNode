@@ -11,11 +11,17 @@
     display: block;
     background: #fff;
   }
+  #uiContainer {
+      top: auto;
+      bottom: 30px;
+  }
 </style>
 <div class="main-box demo">
     <canvas class="draw"></canvas>
-    <div id="uiContainer">
-    <div id="ui"></div>
+    <div class="relative">
+        <div id="uiContainer">
+        <div id="ui"></div>
+    </div>        
 </div>
 <script src="/static/js/webgl-utils.js"></script>
 <script src="/static/js/jquery.tablednd_0_5.js"></script>
