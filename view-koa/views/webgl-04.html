@@ -12,19 +12,24 @@
     background: #fff;
   }
   #uiContainer {
-      top: auto;
-      bottom: 30px;
+      top: -50vh;
+      right: 20%;
+  }
+  #uiContainer li {
+      line-height: 28px;
+      cursor: move;
   }
 </style>
 <div class="main-box demo">
     <canvas class="draw"></canvas>
     <div class="relative">
         <div id="uiContainer">
-        <div id="ui"></div>
+        <ul id="ui"></ul>
     </div>        
 </div>
 <script src="/static/js/webgl-utils.js"></script>
 <script src="/static/js/jquery.tablednd_0_5.js"></script>
+<script src="/static/js/Sortable.js"></script>
 <script id="2d-vertex-shader" type="x-shader/x-vertex">
     attribute vec2 a_position;
     attribute vec2 a_texCoord;
@@ -304,25 +309,25 @@ void main(){
 
         // Setup a ui.
         var $ui = $('#ui');
-        var $table = $('<table></table>');
-        var $tbody = $('<tbody></tbody>');
         for(let ii = 0; ii < effects.length; ++ii){
             let effect = effects[ii];
-            let $tr = $('<tr></tr>');
-            let $td = $('<td></td>');
+            let $li = $('<li></li>');
+            let $label = $('<label></label>');
             let $chc = $('<input type="checkbox"/>');
             $chc.val(effect.name);
             if(effect.on){
                 $chc.prop('checked', true);
             }
             $chc.on('change', drawEffects);
-            $td.append($chc, '= ' + effect.name);
-            $tr.append($td);
-            $tbody.append($tr);
+            $label.append($chc, '= ' + effect.name);
+            $li.append($label);
+            $ui.append($li);
         }
-        $table.append($tbody);
-        $ui.append($table);
-        $("#ui table").tableDnD({onDrop: drawEffects});
+        var sortable = new Sortable( $("#ui").get(0), {
+            group: '#ui',
+            onEnd: drawEffects,
+        });
+        // $("#ui table").tableDnD({onDrop: drawEffects});
 
         drawEffects();
 
@@ -386,8 +391,8 @@ void main(){
 
             // loop through each effect we want to apply.
             var count = 0;
-            for (let ii = 0; ii < $('#ui tbody').get(0).rows.length; ++ii) {
-                let checkbox = $('#ui tbody').get(0).rows[ii].firstChild.firstChild;
+            for (let ii = 0; ii < $('#ui li').length; ++ii) {
+                let checkbox = $('#ui li input').get(ii);
                 if (checkbox.checked) {
                     // Setup to draw into one of the framebuffers.
                     setFramebuffer(framebuffers[count % 2], image.width, image.height);
