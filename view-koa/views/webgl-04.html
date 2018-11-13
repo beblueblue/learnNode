@@ -28,7 +28,6 @@
     </div>        
 </div>
 <script src="/static/js/webgl-utils.js"></script>
-<script src="/static/js/jquery.tablednd_0_5.js"></script>
 <script src="/static/js/Sortable.js"></script>
 <script id="2d-vertex-shader" type="x-shader/x-vertex">
     attribute vec2 a_position;
@@ -327,7 +326,6 @@ void main(){
             group: '#ui',
             onEnd: drawEffects,
         });
-        // $("#ui table").tableDnD({onDrop: drawEffects});
 
         drawEffects();
 
