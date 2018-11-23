@@ -26,7 +26,12 @@ module.exports = {
     },
     'GET /webgl-06': async (ctx,next) => {
         ctx.render('webgl-06.html',{
-            title: 'WebGL原理-二维平移(webgl-2d-rotation)'
+            title: 'WebGL原理-二维旋转(webgl-2d-rotation)'
+        });
+    },
+    'GET /webgl-07': async (ctx,next) => {
+        ctx.render('webgl-07.html',{
+            title: 'WebGL原理-二维缩放(webgl-2d-scale)'
         });
     },
 };
