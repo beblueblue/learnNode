@@ -39,4 +39,9 @@ module.exports = {
             title: 'WebGL原理-二维矩阵(webgl-2d-matrices)'
         });
     },
+    'GET /webgl-09': async (ctx,next) => {
+        ctx.render('webgl-09.html',{
+            title: 'WebGL原理-三维正射投影(webgl-3d-orthographic)'
+        });
+    },
 };
