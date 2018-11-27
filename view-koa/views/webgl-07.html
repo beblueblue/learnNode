@@ -112,7 +112,6 @@ void main(){
 
         // look up uniforms
         attrObj1.resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
-        attrObj1.colorLocation = gl.getUniformLocation(program, 'u_color');
         attrObj1.translationLocation  = gl.getUniformLocation(program, 'u_translation');
         attrObj1.rotationLocation   = gl.getUniformLocation(program, 'u_rotation');
         attrObj1.scaleLocation    = gl.getUniformLocation(program, 'u_scale');
@@ -128,7 +127,6 @@ void main(){
         attrObj1.translation = [0, 0];
         attrObj1.rotation = [0, 1];
         attrObj1.scale  = [1, 1];
-        attrObj1.color = [Math.random(), Math.random(), Math.random(), 1];
         attrObj1.geometryType = 'f';
 
         // 将几何数据存到缓冲
@@ -197,10 +195,7 @@ void main(){
         attrObj.positionLocation, size, type, normalize, stride, offset);
       
       // Set the resolution
-      gl.uniform2f(attrObj.resolutionLocation, gl.canvas.width, gl.canvas.clientHeight);
-
-      // Set the color
-      gl.uniform4fv(attrObj.colorLocation, attrObj.color);
+      gl.uniform2f(attrObj.resolutionLocation, gl.canvas.width, gl.canvas.height);
 
       // Set the translation.
       gl.uniform2fv(attrObj.translationLocation, attrObj.translation);
@@ -276,6 +271,5 @@ void main(){
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(arr), gl.STATIC_DRAW);
     }
     main();
-    main2();
 </script>
 {% endblock %}

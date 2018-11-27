@@ -34,4 +34,9 @@ module.exports = {
             title: 'WebGL原理-二维缩放(webgl-2d-scale)'
         });
     },
+    'GET /webgl-08': async (ctx,next) => {
+        ctx.render('webgl-08.html',{
+            title: 'WebGL原理-二维矩阵(webgl-2d-matrices)'
+        });
+    },
 };
